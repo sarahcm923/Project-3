@@ -1,0 +1,24 @@
+Project Proposal
+
+<Sueli Yahara, Engy Samaan, Sarah Steimle>
+
+Overview:
+We will be looking at wine reviews for wines from around the world.
+We will investigate any correlations between the wine characteristics,
+such as review score, price, region, etc.
+This investigation will help us answer our question:
+"Does a more expensive wine mean a better wine?"
+
+Dataset:
+We will be using a wine review dataset from Kaggle. This dataset contains wine review information
+from 2017. We will also be truncating the dataset from 130,000 to a more reasonable
+size for SQLite (~10k).
+
+Visualizations:
+We will be creating a number of scatter plots to display the relationships
+detailed above.
+
+Solution Architecture:
+We will be using SQLAlchemy/Pandas to import the CSV file and write it to a SQL database.
+Then, we will use Flask to read the database to the HTML site. Using CSS and Javascript,
+we will create an interactive and creative user interface.
