@@ -1,33 +1,27 @@
-import pandas as pd
+from flask import Flask, render_template, redirect, jsonify
+from flask_pymongo import PyMongo
+import wine_data
+import json
 
-from flask import (
-    Flask,
-    render_template,
-    jsonify)
-
-from flask_sqlalchemy import SQLAlchemy
-
+# create instance of Flask app
 app = Flask(__name__)
 
-# The database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///wine_review.sqlite"
+# Use flask_pymongo to set up mongo connection
+app.config["MONGO_URI"] = "mongodb://localhost:27017/wine_app"
+mongo = PyMongo(app)
 
-db = SQLAlchemy(app)
-
-# Create database tables
-@app.before_first_request
-def setup():
-    # Recreate database each time for demo
-    #db.drop_all()
-    db.create_all()
-
+data = wine_data.data()
+data = {'data':data}
+#print(data)
+mongo.db.wine_review.drop()
+mongo.db.wine_review.insert_one(data)
 
 @app.route("/")
 def home():
 
     # Find data
-    review_data = SQLAlchemy.db.wine_review.find_one()
-    print(review_data)
+    review_data = mongo.db.wine_review.find_one()
+    #print(review_data)
     # return template and data
     return render_template("index.html", review_data = review_data)
 
