@@ -11,6 +11,7 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/wine_app"
 mongo = PyMongo(app)
 
 data = wine_data.data()
+data = data.replace("'", r"\'")
 data = {'data':data}
 #print(data)
 mongo.db.wine_review.drop()
@@ -21,7 +22,7 @@ def home():
 
     # Find data
     review_data = mongo.db.wine_review.find_one()
-    #print(review_data)
+    print(review_data)
     # return template and data
     return render_template("index.html", review_data = review_data)
 
