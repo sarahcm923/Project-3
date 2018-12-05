@@ -11,6 +11,17 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/wine_app"
 mongo = PyMongo(app)
 
 data = wine_data.data()
+
+
+# list of unique country names
+pythonlist = json.loads(data)
+countrylist = []
+for x in pythonlist:
+    name = x['country']
+    if (not name in countrylist and name != None):
+        countrylist.append(name)
+
+countrylist.sort()
 data = data.replace("'", r"\'")
 data = {'data':data}
 #print(data)
@@ -24,7 +35,7 @@ def home():
     review_data = mongo.db.wine_review.find_one()
     print(review_data)
     # return template and data
-    return render_template("index.html", review_data = review_data)
+    return render_template("index.html", review_data = review_data, uniq_list = countrylist)
 
 if __name__ == '__main__':
     app.run(debug=True)
