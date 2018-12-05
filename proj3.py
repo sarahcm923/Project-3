@@ -37,5 +37,15 @@ def home():
     # return template and data
     return render_template("index.html", review_data = review_data, uniq_list = countrylist)
 
+@app.route("/data")
+def data_load():
+
+    # Find data
+    review_data = mongo.db.wine_review.find_one()
+    print(review_data)
+    review_data = json.dumps(review_data)
+    # return template and data
+    return review_data
+
 if __name__ == '__main__':
     app.run(debug=True)
