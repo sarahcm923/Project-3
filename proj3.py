@@ -33,7 +33,7 @@ def home():
 
     # Find data
     review_data = mongo.db.wine_review.find_one()
-    print(review_data)
+    #print(review_data)
     # return template and data
     return render_template("index.html", review_data = review_data, uniq_list = countrylist)
 
@@ -42,10 +42,12 @@ def data_load():
 
     # Find data
     review_data = mongo.db.wine_review.find_one()
-    print(review_data)
-    review_data = json.dumps(review_data)
+    # print(review_data["ObjectId"])
+    #review_data = json.dumps(review_data)
     # return template and data
-    return review_data
+    #print(review_data)
+    return jsonify(review_data['data'])
+    #return review_data
 
 if __name__ == '__main__':
     app.run(debug=True)
