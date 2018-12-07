@@ -1,0 +1,15 @@
+.jumbotron{
+    color: darkred;
+    background-size: contain;
+    background-color: whitesmoke;
+    opacity: 0.8;
+}
+
+.col-md-12{
+    color: darkred;
+}
+
+img{
+    vertical-align: middle;
+    width: 100%;
+}
