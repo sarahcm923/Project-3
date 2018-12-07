@@ -5,11 +5,15 @@
     opacity: 0.8;
 }
 
-.col-md-12{
-    color: darkred;
-}
-
 img{
     vertical-align: middle;
     width: 100%;
 }
+
+select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    color: darkred;
+    outline: darkgray;
+  }
