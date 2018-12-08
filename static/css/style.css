@@ -1,7 +1,7 @@
 .jumbotron{
-    color: white;
+    color: #B9343F ;
     background-size: contain;
-    background-color: #3C5365;
+    background-color: white;
     opacity: 0.8;
 }
 
@@ -30,6 +30,17 @@ select {
     color: white;
 }
 
+#scatter1{
+    background-color: white;  
+}
+
+#scatter2{
+    background-color: white;  
+}
+
+#scatter3{
+    background-color: white;  
+}
 /* .wine{
     background-color: #C5C1B4;
     background-size: auto;
