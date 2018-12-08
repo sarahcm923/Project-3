@@ -1,7 +1,7 @@
 .jumbotron{
-    color: darkred;
+    color: white;
     background-size: contain;
-    background-color: whitesmoke;
+    background-color: #3C5365;
     opacity: 0.8;
 }
 
@@ -9,11 +9,49 @@ img{
     vertical-align: middle;
     width: 100%;
 }
-
+body{
+    background-color:whitesmoke;
+}
 select {
     display: block;
     width: 100%;
     padding: 8px;
-    color: darkred;
+    color: black;
     outline: darkgray;
-  }
+}
+.container-prg {
+    background: #90B16A;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left:40px;
+    margin-right: 10px;
+    align-content: center;
+    padding: 20px;
+    color: white;
+}
+
+/* .wine{
+    background-color: #C5C1B4;
+    background-size: auto;
+} */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+td {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+th {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color:black;
+    color: white;
+    
+    }
+table.dataframe tr:nth-child(even) {
+    background-color: #eee;
+}
+table.dataframe tr:nth-child(odd) {
+    background-color: #fff;
+}            

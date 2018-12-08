@@ -22,7 +22,7 @@ for x in pythonlist:
         countrylist.append(name)
 
 countrylist.sort()
-data = data.replace("'", r"\'")
+#data = data.replace("'", r"\'")
 data = {'data':data}
 #print(data)
 mongo.db.wine_review.drop()
