@@ -34,13 +34,25 @@ select {
     background-color: white;  
 }
 
-#scatter2{
+#barchart{
     background-color: white;  
 }
 
 #scatter3{
     background-color: white;  
 }
+.d3-tip {
+    padding: 6px;
+    font-size: 12px;
+    line-height: 1;
+    line-height: 1.5em;
+    color: #fff;
+    text-align: center;
+    text-transform: capitalize;
+    background: black;
+    border-radius: 4px;
+  }
+
 /* .wine{
     background-color: #C5C1B4;
     background-size: auto;
@@ -58,6 +70,7 @@ th {
     padding: 10px;
     background-color:black;
     color: white;
+    text-align: center;
     
     }
 table.dataframe tr:nth-child(even) {
@@ -66,3 +79,25 @@ table.dataframe tr:nth-child(even) {
 table.dataframe tr:nth-child(odd) {
     background-color: #fff;
 }            
+
+  
+  
+#map {
+    height: 600px;
+  }
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%; /* Set the fixed height of the footer here */
+    height: 10px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+    text-align: center;
+    background-color: black;
+}
+  
+footer p {
+    margin: 0;
+    font-size: 16px;
+}
