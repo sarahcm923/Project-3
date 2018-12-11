@@ -88,7 +88,7 @@ var chartGroup = svg.append("g")
     filterData.forEach(function(d) {
         d.price = +d.price;
         d.points = +d.points;
-        console.log(d.winery);
+        // console.log(d.winery);
         
     });
 
@@ -202,7 +202,7 @@ var tableGroup = tsvg.append("g")
   }
   
   bar_pareto = TopValues(filterData);
-  console.log(bar_pareto);
+  // console.log(bar_pareto);
 
   // Configure a band scale for the horizontal axis with a padding of 0.1 (10%)
   var xBandScale = d3.scaleBand()
@@ -316,12 +316,14 @@ var tableGroup = tsvg.append("g")
            if (status === 'OK') {
                const result = results[0].geometry.location
                const lat = result.lat()
+               console.log(lat);
+               
                const lng = result.lng()
                const latLng = {
                    lat,
                    lng
                }
-              //  console.log(latLng);
+               console.log(latLng);
                return new google.maps.Marker({
                    map: map,
                    position: latLng
@@ -347,8 +349,8 @@ var tableGroup = tsvg.append("g")
      d3.json("/data").then((country) => {
       //  console.log(typeof(country))
        country = JSON.parse(country);
-       console.log(typeof(country))
-       console.log(country)
+      //  console.log(typeof(country))
+      //  console.log(country)
        country.forEach((sample) => {
          selector
             //.append("option")
