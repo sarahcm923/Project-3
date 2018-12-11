@@ -1,7 +1,7 @@
 //Function to populate the graph when an option is made
 // ====================================================
 function optionChanged(e){
-  console.log(e);
+  // console.log(e);
     d3.select("#scatter1").html("");
     d3.select("#barchart").html("");
     //buildGraph("ALL");
@@ -15,9 +15,9 @@ var URL = `/data`;
   d3.json(URL).then(function(Data, error) {
     if (error) throw error;
     data = JSON.parse(Data)
-    console.log(data);
+    // console.log(data);
     var addresses = data.map(d => d.province + ', ' + d.country);
-    console.log(addresses); 
+    // console.log(addresses); 
    // buildGraph("ALL");
     nearbyEventsMap(addresses);
     });
@@ -53,15 +53,15 @@ function buildGraph(country){
 // filtering the country graph
   if (country == "ALL"){
     var filterData =  data;
-    console.log(filterData);
+    // console.log(filterData);
   }
   else {
     var filterData =  data.filter(d => d.country == country);
-    console.log(filterData);
+    // console.log(filterData);
   }
  
 //Canvas set up (SVG area)
-var svgWidth = 800;
+var svgWidth = 1100;
 var svgHeight = 500;
 
 var margin = {
@@ -88,6 +88,8 @@ var chartGroup = svg.append("g")
     filterData.forEach(function(d) {
         d.price = +d.price;
         d.points = +d.points;
+        console.log(d.winery);
+        
     });
 
     // reate scale functions
@@ -131,7 +133,7 @@ var chartGroup = svg.append("g")
     .attr("cx", d => xLinearScale(d.price))
     .attr("cy", d => yLinearScale(d.points))
     .attr("r", "5")
-    .attr("fill", "orange")
+    .attr("fill", "red")
     .attr("opacity", ".5");
 
     //Initialize tool tip
@@ -176,13 +178,13 @@ var chartGroup = svg.append("g")
 // Select body, append SVG area to it, and set the dimensions
 //colors = d3.scale.category20()
 
-var svg = d3.select("#barchart")
+var tsvg = d3.select("#barchart")
   .append("svg")
   .attr("height", svgHeight)
   .attr("width", svgWidth);
 
 // Append a group to the SVG area and shift ('translate') it to the right and to the bottom
-var chartGroup = svg.append("g")
+var tableGroup = tsvg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
 filterData.forEach(function(d) {
@@ -196,32 +198,32 @@ filterData.forEach(function(d) {
     .padding(0.1);
 
   // Create a linear scale for the vertical axis.
-  var yLinearScale = d3.scaleLinear()
+  var tyLinearScale = d3.scaleLinear()
   .domain([0, d3.max(filterData, d => d.points)])
     .range([height, 0]);
 
   // Create two new functions passing our scales in as arguments
   // These will be used to create the chart's axes
-  var bottomAxis = d3.axisBottom(xBandScale);
-  var leftAxis = d3.axisLeft(yLinearScale).ticks(5);
+  var tbottomAxis = d3.axisBottom(xBandScale);
+  var tleftAxis = d3.axisLeft(tyLinearScale).ticks(5);
 
   // Append two SVG group elements to the chartGroup area,
   // and create the bottom and left axes inside of them
-  chartGroup.append("g")
-    .call(leftAxis);
+  tableGroup.append("g")
+    .call(tleftAxis);
 
-  chartGroup.append("g")
+    tableGroup.append("g")
       .attr("class", "x axis")
       .attr("transform", `translate(0, ${height})`)
-      .call(bottomAxis)
+      .call(tbottomAxis)
       .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
-        .attr("transform", "rotate(-90)");
+        .attr("transform", "rotate(-65)");
 
   // Create one SVG rectangle per piece of tvData
   // Use the linear and band scales to position each rectangle within the chart
-  chartGroup.selectAll(".bar")
+  var tablesGroup = tableGroup.selectAll(".bar")
   .data(filterData)
     .enter()
     .append("rect")
@@ -233,71 +235,9 @@ filterData.forEach(function(d) {
     .attr("fill","lightblue");
     
 
-    //var variety = [];
-
-    // filterData.forEach(function(name){
-    //   variety.push(data.variety)
-
-    // });
-    // console.log(variety);
-    
-    // Step 2: Create scale functions
+    // Step 6: Initialize tool tip of the scatter plot 
     // ==============================
-    // var xLinearScale = d3.scale.ordinal()
-    // .domain([0, d3.max(filterData, d => d.price)])
-    //   .range([0, width]);
-
-    // var yLinearScale = d3.scaleLinear()
-    //   .domain([80, d3.max(data, d => d.points)])
-    //   .range([height, 0]);
-
-    // // Step 3: Create axis functions
-    // // ==============================
-    // var bottomAxis = d3.axisBottom(xLinearScale);
-    // var leftAxis = d3.axisLeft(yLinearScale);
-    
-    // // Step 4: Append Axes to the chart
-    // // ==============================
-    // chartGroup.append("g")
-    //   .attr("transform", `translate(0, ${height})`)
-    //   .call(bottomAxis)
-      
-    // chartGroup.append("g")
-    //   .call(leftAxis)
-
-    // // Define the lines
-    // var valueline = d3.svg.line()
-    // .x(function(d) { return x(d.date); })
-    // .y(function(d) { return y(d.close); });
-      
-    // Step 5: Create Circles
-    // ==============================
-    // var circlesGroup = chartGroup.selectAll("circle")
-    // .data(data)
-    // .enter()
-    // .append("circle")
-    // .attr("cx", d => xLinearScale(d.price))
-    // .attr("cy", d => yLinearScale(d.points))
-    // .attr("r", "20")
-    // .attr("fill", "red")
-    // .attr("opacity", ".5");
-
-//     // Create the variety for each circle
-//     var circlesGroup = chartGroup.append("g")
-//     .selectAll("text")
-//     .data(data)
-//     .enter().append("text")
-//     .text(data => data.country)
-//     .attr("text-anchor", "middle")
-//     .attr("fill", "white")
-//     .attr('font-size',12)
-//     .attr("dx", d => xLinearScale(d.price))
-//     .attr("dy", d => yLinearScale(d.variety));
-        
-
-    // Step 6: Initialize tool tip
-    // ==============================
-    var toolTip = d3.tip()
+    var table_toolTip = d3.tip()
       .attr("class", "d3-tip")
       .offset([80,-60])
       .html(function(d) {
@@ -306,20 +246,20 @@ filterData.forEach(function(d) {
 
     // Step 7: Create tooltip in the chart
     // ==============================
-    chartGroup.call(toolTip);
+    tableGroup.call(table_toolTip);
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
-    circlesGroup.on("mouseover", function(data) {
-      toolTip.show(data, this);
+    tablesGroup.on("mouseover", function(data) {
+      table_toolTip.show(data, this);
     })
       // onmouseout event
       .on("mouseout", function(data, index) {
-        toolTip.hide(data);
+        table_toolTip.hide(data);
       });
 
-    // Create axes labels
-    chartGroup.append("text")
+    // Create axes labelse
+    tableGroup.append("text")
       .attr("transform", "rotate(-90)")
       .attr("y", 0 - margin.left + 30)
       .attr("x", 0 - (height/ 1.5))
@@ -327,14 +267,14 @@ filterData.forEach(function(d) {
       .attr("class", "axisText")
       .text("Points");
 
-    chartGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      tableGroup.append("text")
+      .attr("transform", `translate(${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Variety");
+      .text("Variety")
 
 }
 
- //  geomaping
+ //  Google Maps 
  var map;
  // Nearby Events with Google Maps
  window.nearbyEventsMap = (provinces) => {
@@ -343,7 +283,7 @@ filterData.forEach(function(d) {
    initMap();
    const geocoder = new google.maps.Geocoder()
  
-   console.log(provinces)
+  //  console.log(provinces)
    for ( x in provinces) {
        const location = provinces[x]
  
@@ -358,7 +298,7 @@ filterData.forEach(function(d) {
                    lat,
                    lng
                }
-               console.log(latLng);
+              //  console.log(latLng);
                return new google.maps.Marker({
                    map: map,
                    position: latLng
@@ -382,10 +322,10 @@ filterData.forEach(function(d) {
 
   // Use the list of countries to populate the select options
      d3.json("/data").then((country) => {
-       console.log(typeof(country))
+      //  console.log(typeof(country))
        country = JSON.parse(country);
-       console.log(typeof(country))
-       console.log(country)
+      //  console.log(typeof(country))
+      //  console.log(country)
        country.forEach((sample) => {
          selector
            .append("option")
@@ -403,132 +343,4 @@ filterData.forEach(function(d) {
 init();
 
 
-    //   // graph2 in id #scatter2
-    //   var trace1 = {
-    //     x: data.points,
-    //     y: data.price,
-    //     hovertext: data.country,
-    //     mode: 'markers',
-    //     marker: {
-    //       color: blue,
-    //       //opacity: [1, 0.8, 0.6, 0.4],
-    //     size: data.points,
-    //     type: "bubble"
-    //     }
-    //   };
-      
-    //   var data1 = [trace1];
-      
-    //   var layout = {
-    //     showlegend: false,
-    //     xaxis: { title: "OTU ID"},
-    //     height: 600,
-    //     width: 1300
-    //   };
- 
-    //  Plotly.newPlot('scatter2', data1, layout);
-
-    // var svg = d3.select("#scatter3")
-//   .append("svg")
-//   .attr("width", svgWidth)
-//   .attr("height", svgHeight);
-
-// var chartGroup = svg.append("g")
-//   .attr("transform", `translate(${margin.left}, ${margin.top})`);
   
-// // Import Data
-
-//    // Step 1: Parse Data/Cast as numbers
-//     // ==============================
-//     data.forEach(function(d) {
-//         d.price = +d.price;
-//         //data.points = +data.points;
-//     });
-
-    
-//     // Step 2: Create scale functions
-//     // ==============================
-//     var xLinearScale = d3.scaleLinear()
-//       .domain([0, d3.max(data, d => d.price)])
-//       .range([0, width]);
-
-//     var yLinearScale = d3.scaleLinear()
-//       .domain([80, d3.max(data, d => d.winery)])
-//       .range([height, 0]);
-
-//     // Step 3: Create axis functions
-//     // ==============================
-//     var bottomAxis = d3.axisBottom(xLinearScale);
-//     var leftAxis = d3.axisLeft(yLinearScale);
-    
-//     // Step 4: Append Axes to the chart
-//     // ==============================
-//     chartGroup.append("g")
-//       .attr("transform", `translate(0, ${height})`)
-//       .call(bottomAxis)
-      
-//     chartGroup.append("g")
-//       .call(leftAxis)
-      
-//     // Step 5: Create Circles
-//     // ==============================
-//     var circlesGroup = chartGroup.selectAll("circle")
-//     .data(data)
-//     .enter()
-//     .append("circle")
-//     .attr("cx", d => xLinearScale(d.price))
-//     .attr("cy", d => yLinearScale(d.winery))
-//     .attr("r", "20")
-//     .attr("fill", "orange")
-//     .attr("opacity", ".5");
-
-//     // Create the variety for each circle
-//     var circlesGroup = chartGroup.append("g")
-//     .selectAll("text")
-//     .data(data)
-//     .enter().append("text")
-//     .text(data => data.country)
-//     .attr("text-anchor", "middle")
-//     .attr("fill", "white")
-//     .attr('font-size',12)
-//     .attr("dx", d => xLinearScale(d.price))
-//     .attr("dy", d => yLinearScale(d.winery));
-        
-
-//     // Step 6: Initialize tool tip
-//     // ==============================
-//     var toolTip = d3.tip()
-//       .attr("class", "d3-tip")
-//       .offset([80,-60])
-//       .html(function(d) {
-//         return (`${d.country}<br>Price: ${d.price}<br>Points: ${d.winery}`);
-//       });
-
-//     // Step 7: Create tooltip in the chart
-//     // ==============================
-//     chartGroup.call(toolTip);
-
-//     // Step 8: Create event listeners to display and hide the tooltip
-//     // ==============================
-//     circlesGroup.on("mouseover", function(data) {
-//       toolTip.show(data, this);
-//     })
-//       // onmouseout event
-//       .on("mouseout", function(data, index) {
-//         toolTip.hide(data);
-//       });
-
-//     // Create axes labels
-//     chartGroup.append("text")
-//       .attr("transform", "rotate(-90)")
-//       .attr("y", 0 - margin.left + 30)
-//       .attr("x", 0 - (height/ 1.5))
-//       .attr("dy", "1em")
-//       .attr("class", "axisText")
-//       .text("Points");
-
-//     chartGroup.append("text")
-//       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
-//       .attr("class", "axisText")
-//       .text("Price");
-//     };
