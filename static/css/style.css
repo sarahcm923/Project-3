@@ -37,7 +37,8 @@ select {
 }
 
 #barchart{
-    background-color: white;  
+    background-color: white;
+    margin-top: 15px; 
 }
 
 #scatter3{
@@ -84,10 +85,10 @@ table.dataframe tr:nth-child(odd) {
     background-color: #fff;
 }            
 
-  
-  
 #map {
     height: 600px;
+    margin-top: 50px;
+    border: 10px solid black;
   }
 
 footer {
@@ -106,7 +107,7 @@ footer p {
     font-size: 16px;
 }
 
-
+/* barChart toolTip */
 .axis path,
 .axis line {
   fill: none;
@@ -135,7 +136,7 @@ footer p {
     border-radius: 2px;
   }
 
-/* Creates a small triangle extender for the tooltip */
+/* Creates a small triangle extender for the tableChart tooltip */
 .d3-tip:after {
     box-sizing: border-box;
     display: inline;

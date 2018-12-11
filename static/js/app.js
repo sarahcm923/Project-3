@@ -61,7 +61,7 @@ function buildGraph(country){
   }
  
 //Canvas set up (SVG area)
-var svgWidth = 800;
+var svgWidth = 1100;
 var svgHeight = 500;
 
 var margin = {
@@ -219,7 +219,7 @@ filterData.forEach(function(d) {
       .selectAll("text")
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
-        .attr("transform", "rotate(-90)");
+        .attr("transform", "rotate(-65)");
 
   // Create one SVG rectangle per piece of tvData
   // Use the linear and band scales to position each rectangle within the chart
@@ -268,9 +268,9 @@ filterData.forEach(function(d) {
       .text("Points");
 
       tableGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("transform", `translate(${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Variety");
+      .text("Variety")
 
 }
 
@@ -298,7 +298,7 @@ filterData.forEach(function(d) {
                    lat,
                    lng
                }
-               console.log(latLng);
+              //  console.log(latLng);
                return new google.maps.Marker({
                    map: map,
                    position: latLng
@@ -343,132 +343,4 @@ filterData.forEach(function(d) {
 init();
 
 
-    //   // graph2 in id #scatter2
-    //   var trace1 = {
-    //     x: data.points,
-    //     y: data.price,
-    //     hovertext: data.country,
-    //     mode: 'markers',
-    //     marker: {
-    //       color: blue,
-    //       //opacity: [1, 0.8, 0.6, 0.4],
-    //     size: data.points,
-    //     type: "bubble"
-    //     }
-    //   };
-      
-    //   var data1 = [trace1];
-      
-    //   var layout = {
-    //     showlegend: false,
-    //     xaxis: { title: "OTU ID"},
-    //     height: 600,
-    //     width: 1300
-    //   };
- 
-    //  Plotly.newPlot('scatter2', data1, layout);
-
-    // var svg = d3.select("#scatter3")
-//   .append("svg")
-//   .attr("width", svgWidth)
-//   .attr("height", svgHeight);
-
-// var chartGroup = svg.append("g")
-//   .attr("transform", `translate(${margin.left}, ${margin.top})`);
   
-// // Import Data
-
-//    // Step 1: Parse Data/Cast as numbers
-//     // ==============================
-//     data.forEach(function(d) {
-//         d.price = +d.price;
-//         //data.points = +data.points;
-//     });
-
-    
-//     // Step 2: Create scale functions
-//     // ==============================
-//     var xLinearScale = d3.scaleLinear()
-//       .domain([0, d3.max(data, d => d.price)])
-//       .range([0, width]);
-
-//     var yLinearScale = d3.scaleLinear()
-//       .domain([80, d3.max(data, d => d.winery)])
-//       .range([height, 0]);
-
-//     // Step 3: Create axis functions
-//     // ==============================
-//     var bottomAxis = d3.axisBottom(xLinearScale);
-//     var leftAxis = d3.axisLeft(yLinearScale);
-    
-//     // Step 4: Append Axes to the chart
-//     // ==============================
-//     chartGroup.append("g")
-//       .attr("transform", `translate(0, ${height})`)
-//       .call(bottomAxis)
-      
-//     chartGroup.append("g")
-//       .call(leftAxis)
-      
-//     // Step 5: Create Circles
-//     // ==============================
-//     var circlesGroup = chartGroup.selectAll("circle")
-//     .data(data)
-//     .enter()
-//     .append("circle")
-//     .attr("cx", d => xLinearScale(d.price))
-//     .attr("cy", d => yLinearScale(d.winery))
-//     .attr("r", "20")
-//     .attr("fill", "orange")
-//     .attr("opacity", ".5");
-
-//     // Create the variety for each circle
-//     var circlesGroup = chartGroup.append("g")
-//     .selectAll("text")
-//     .data(data)
-//     .enter().append("text")
-//     .text(data => data.country)
-//     .attr("text-anchor", "middle")
-//     .attr("fill", "white")
-//     .attr('font-size',12)
-//     .attr("dx", d => xLinearScale(d.price))
-//     .attr("dy", d => yLinearScale(d.winery));
-        
-
-//     // Step 6: Initialize tool tip
-//     // ==============================
-//     var toolTip = d3.tip()
-//       .attr("class", "d3-tip")
-//       .offset([80,-60])
-//       .html(function(d) {
-//         return (`${d.country}<br>Price: ${d.price}<br>Points: ${d.winery}`);
-//       });
-
-//     // Step 7: Create tooltip in the chart
-//     // ==============================
-//     chartGroup.call(toolTip);
-
-//     // Step 8: Create event listeners to display and hide the tooltip
-//     // ==============================
-//     circlesGroup.on("mouseover", function(data) {
-//       toolTip.show(data, this);
-//     })
-//       // onmouseout event
-//       .on("mouseout", function(data, index) {
-//         toolTip.hide(data);
-//       });
-
-//     // Create axes labels
-//     chartGroup.append("text")
-//       .attr("transform", "rotate(-90)")
-//       .attr("y", 0 - margin.left + 30)
-//       .attr("x", 0 - (height/ 1.5))
-//       .attr("dy", "1em")
-//       .attr("class", "axisText")
-//       .text("Points");
-
-//     chartGroup.append("text")
-//       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
-//       .attr("class", "axisText")
-//       .text("Price");
-//     };
