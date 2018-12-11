@@ -324,13 +324,13 @@ filterData.forEach(function(d) {
      d3.json("/data").then((country) => {
       //  console.log(typeof(country))
        country = JSON.parse(country);
-      //  console.log(typeof(country))
-      //  console.log(country)
+       console.log(typeof(country))
+       console.log(country)
        country.forEach((sample) => {
          selector
-           .append("option")
-           .text(sample)
-           .property("value", sample);
+      //      .append("option")
+      //      .text(sample)
+            .property("value", sample);
        });
 
     // Use the first sample from the list to build the initial plots
