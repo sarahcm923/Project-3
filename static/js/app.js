@@ -187,19 +187,25 @@ var tsvg = d3.select("#barchart")
 var tableGroup = tsvg.append("g")
   .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
-filterData.forEach(function(d) {
-    d.points = +d.points;
-  });
+  function TopValues(arrayData){
+    arrayData.sort(function(a,b) {
+      return d3.descending(a.points, b.points);
+    });
+    return arrayData.slice(0,20);
+  }
+  
+  bar_pareto = TopValues(filterData);
+  console.log(bar_pareto);
 
   // Configure a band scale for the horizontal axis with a padding of 0.1 (10%)
   var xBandScale = d3.scaleBand()
-    .domain(filterData.map(d => d.variety))
+    .domain(bar_pareto.map(d => d.winery))
     .range([0, width])
     .padding(0.1);
 
   // Create a linear scale for the vertical axis.
   var tyLinearScale = d3.scaleLinear()
-  .domain([0, d3.max(filterData, d => d.points)])
+  .domain([0, d3.max(bar_pareto, d => d.points)])
     .range([height, 0]);
 
   // Create two new functions passing our scales in as arguments
@@ -220,15 +226,18 @@ filterData.forEach(function(d) {
         .style("text-anchor", "end")
         .attr("dx", "-.8em")
         .attr("transform", "rotate(-65)");
+  
+  // function to pareto top 20 values      
+
 
   // Create one SVG rectangle per piece of tvData
   // Use the linear and band scales to position each rectangle within the chart
   var tablesGroup = tableGroup.selectAll(".bar")
-  .data(filterData)
+  .data(bar_pareto)
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", d => xBandScale(d.variety))
+    .attr("x", d => xBandScale(d.winery))
     .attr("y", d => yLinearScale(d.points))
     .attr("width", xBandScale.bandwidth())
     .attr("height", d => height - yLinearScale(d.points))
@@ -268,10 +277,10 @@ filterData.forEach(function(d) {
       .text("Points");
 
       tableGroup.append("text")
-      .attr("transform", `translate(${height + margin.top + 30})`)
+      .attr("transform", `translate(${width / 2},${height + margin.top + 30})`)
       .attr("class", "axisText")
-      .text("Variety")
-
+      .text("Winery")
+    
 }
 
  //  Google Maps 
