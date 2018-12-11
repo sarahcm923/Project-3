@@ -133,7 +133,7 @@ var chartGroup = svg.append("g")
     .attr("cx", d => xLinearScale(d.price))
     .attr("cy", d => yLinearScale(d.points))
     .attr("r", "5")
-    .attr("fill", "orange")
+    .attr("fill", "red")
     .attr("opacity", ".5");
 
     //Initialize tool tip
