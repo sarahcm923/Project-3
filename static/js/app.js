@@ -65,10 +65,10 @@ var svgWidth = 1100;
 var svgHeight = 500;
 
 var margin = {
-  top: 20,
-  right: 20,
+  top: 80,
+  right: 80,
   bottom: 80,
-  left: 80
+  left: 100
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -119,10 +119,10 @@ var chartGroup = svg.append("g")
     // Color definition
     //const colorValue = d => d.points;
     //const colorScale = d3.scaleOrdinal()
-    var colors = d3.scaleLinear()
+   // var colors = d3.scaleLinear()
     //.domain(d3.ticks(0, 50, 11))
-    .range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", 
-    "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
+    //.range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", 
+   // "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
 		  
     //Create Circles
     // ==============================
@@ -255,7 +255,7 @@ var tableGroup = tsvg.append("g")
     // ==============================
     var table_toolTip = d3.tip()
       .attr("class", "d3-tip")
-      .offset([80,-60])
+      //.offset([80,-60])
       .html(function(d) {
         return (`${d.country}<br>Province: ${d.province}<br>Price: ${d.price}`);
       });
@@ -351,8 +351,8 @@ var tableGroup = tsvg.append("g")
        console.log(country)
        country.forEach((sample) => {
          selector
-      //      .append("option")
-      //      .text(sample)
+            //.append("option")
+            //.text(sample)
             .property("value", sample);
        });
 
