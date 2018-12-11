@@ -332,7 +332,7 @@ filterData.forEach(function(d) {
       .attr("class", "axisText")
       .text("Variety");
 
-
+}
 
  //  geomaping
  var map;
@@ -374,7 +374,7 @@ filterData.forEach(function(d) {
      zoom: 2
    });
   }
- }
+ 
 
  function init() {
   // Grab a reference to the dropdown select element
