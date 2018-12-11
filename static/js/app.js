@@ -172,6 +172,13 @@ var chartGroup = svg.append("g")
       .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("Price");
+
+      chartGroup.append("text")
+      .attr("x", (width / 2))             
+      .attr("y", 0 - (margin.top / 2))
+      .attr("text-align", "center")  
+      .style("font-size", "16px") 
+      .text("Wine Rating vs. Price");
     
 // Graph 2  in id #scatter2
 // ==============================
@@ -280,6 +287,13 @@ var tableGroup = tsvg.append("g")
       .attr("transform", `translate(${width / 2},${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("Winery")
+
+      tableGroup.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-align", "center")  
+        .style("font-size", "16px") 
+        .text("Top Rated Wineries");
     
 }
 
