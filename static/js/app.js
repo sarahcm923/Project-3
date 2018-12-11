@@ -211,8 +211,13 @@ filterData.forEach(function(d) {
     .call(leftAxis);
 
   chartGroup.append("g")
-    .attr("transform", `translate(0, ${height})`)
-    .call(bottomAxis);
+      .attr("class", "x axis")
+      .attr("transform", `translate(0, ${height})`)
+      .call(bottomAxis)
+      .selectAll("text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("transform", "rotate(-90)");
 
   // Create one SVG rectangle per piece of tvData
   // Use the linear and band scales to position each rectangle within the chart
@@ -226,6 +231,7 @@ filterData.forEach(function(d) {
     .attr("width", xBandScale.bandwidth())
     .attr("height", d => height - yLinearScale(d.points))
     .attr("fill","lightblue");
+    
 
     //var variety = [];
 
