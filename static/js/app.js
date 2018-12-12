@@ -161,7 +161,7 @@ var chartGroup = svg.append("g")
       .text("Points");
 
     chartGroup.append("text")
-      .attr("transform", `translate(${width / 2}, ${height + margin.top + 30})`)
+      .attr("transform", `translate( ${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("Price");
 
@@ -276,7 +276,7 @@ var tableGroup = tsvg.append("g")
       .text("Points");
 
       tableGroup.append("text")
-      .attr("transform", `translate(${width / 2},${height + margin.top + 30})`)
+      .attr("transform", `translate(${height + margin.top + 30})`)
       .attr("class", "axisText")
       .text("Winery")
 
