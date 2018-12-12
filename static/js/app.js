@@ -116,14 +116,6 @@ var chartGroup = svg.append("g")
     chartGroup.append("g")
       .call(leftAxis)
 
-    // Color definition
-    //const colorValue = d => d.points;
-    //const colorScale = d3.scaleOrdinal()
-   // var colors = d3.scaleLinear()
-    //.domain(d3.ticks(0, 50, 11))
-    //.range(["#5E4FA2", "#3288BD", "#66C2A5", "#ABDDA4", "#E6F598", 
-   // "#FFFFBF", "#FEE08B", "#FDAE61", "#F46D43", "#D53E4F", "#9E0142"]);
-		  
     //Create Circles
     // ==============================
     var circlesGroup = chartGroup.selectAll("circle")
@@ -140,7 +132,7 @@ var chartGroup = svg.append("g")
     // ==============================
     var toolTip = d3.tip()
       .attr("class", "d3-tip")
-      //.offset([80,-60])
+      .offset([80,-60])
       .html(function(d) {
         return (`${d.country}<br>Winery: ${d.winery}<br>Price:$ ${d.price}<br>Points: ${d.points}`);
       });
@@ -255,7 +247,7 @@ var tableGroup = tsvg.append("g")
     // ==============================
     var table_toolTip = d3.tip()
       .attr("class", "d3-tip")
-      //.offset([80,-60])
+      .offset([80,-60])
       .html(function(d) {
         return (`${d.country}<br>Province: ${d.province}<br>Price: ${d.price}`);
       });
